@@ -1,8 +1,3 @@
-"""
-@author:32369
-@file:dataloader.py
-@time:2021/11/05
-"""
 from torch.utils.data import Dataset
 
 

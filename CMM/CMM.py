@@ -1,8 +1,3 @@
-"""
-@author:32369
-@file:MIC.py
-@time:2021/10/21
-"""
 import torch
 import torch.nn as nn
 

@@ -1,8 +1,3 @@
-"""
-@author:32369
-@file:processData.py
-@time:2021/11/03
-"""
 import math
 import random
 import re
@@ -172,7 +167,6 @@ def NegSample(neg_impression, ratio):
         return random.sample(neg_impression, k=ratio)
 
 
-# 从候选新闻中随机抽取his_max_length-1个负样本和一个正样本
 def getImpressionOnTrain(impressions, neg_max_length):
     pos_impression = []
     neg_impression = []
@@ -206,7 +200,6 @@ def getImpressionOnTest(impressions):
     return imp_list, imp_label
 
 
-# 按照时间抽样
 def getHistorySampleByAfter(history, his_max_length):
     history = ["EMP"] * (his_max_length - len(history)) + history[: his_max_length]
     return history
@@ -215,11 +208,5 @@ def getHistorySampleByAfter(history, his_max_length):
 
 if __name__ == '__main__':
     config = Config()
-    glove_dict = np.load(config.PROCESS_DATA_PATH + "glove_dict.npy", allow_pickle=True)
-    cate2id = np.load(config.PROCESS_DATA_PATH + "cate2id.npy", allow_pickle=True).item()
-    subcate2id = np.load(config.PROCESS_DATA_PATH + "subcate2id.npy", allow_pickle=True).item()
-    news_dict = np.load(config.PROCESS_DATA_PATH + "news_dict.npy", allow_pickle=True).item()
-    word2id = np.load(config.PROCESS_DATA_PATH + "word2id.npy", allow_pickle=True).item()
-
-    train_sample, _ = getMindDataset(config, "train", news_dict, word2id, cate2id, subcate2id, config.nsample)
-    test_sample, index = getMindDataset(config, "dev", news_dict, word2id, cate2id, subcate2id)
+    getWordDictByGlove(config)
+    getCategoryAndNewsDict(config)

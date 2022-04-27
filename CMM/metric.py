@@ -1,8 +1,3 @@
-"""
-@author:32369
-@file:metric.py
-@time:2022/03/19
-"""
 import numpy as np
 from sklearn.metrics import roc_auc_score
 
