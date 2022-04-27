@@ -28,7 +28,7 @@ class Config:
                  "AbstractEntities"]
 
     PROCESS_DATA_PATH = "../processedData/"
-    GLOVE_PATH = 'glove/glove.6B.300d.txt'
+    GLOVE_PATH = 'glove/glove.42B.300d.txt'
     FEATURE_EMB_LENGTH = 300
     Q, K, V = 300, 512, 512
     HIDDEN_SIZE = 512
