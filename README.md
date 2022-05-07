@@ -1,4 +1,4 @@
-#Pytorch-CMM实现 #
+#Pytorch-SMFF实现 #
 
 ## 数据集准备
 * MIND新闻推荐数据集，下载链接：https://msnews.github.io/
@@ -8,13 +8,13 @@
 1.创建文件夹
 ```angular2html
     cd data                
-    mkdir mind             # The path to the MIND dataset
+    mkdir mind             # The path to the MIND_small dataset
     mkdir glove            # The path of the glove word vector
     mkdir processedData    # The path of the Preprocessed files
 ```
 2.预处理数据集
 ```angular2html
-    cd CMM
+    cd SMFF
     python ProcessMindByGlove.py
 ```
 
