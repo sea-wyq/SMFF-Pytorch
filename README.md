@@ -14,7 +14,6 @@
 ```
 2.预处理数据集
 ```angular2html
-    cd SMFF
     python ProcessMindByGlove.py
 ```
 
