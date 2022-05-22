@@ -8,7 +8,7 @@
 1.创建文件夹
 ```angular2html
     cd data                
-    mkdir mind             # The path to the MIND_small dataset
+    mkdir mind             # The path to the MIND dataset
     mkdir glove            # The path of the glove word vector
     mkdir processedData    # The path of the Preprocessed files
 ```
