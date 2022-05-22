@@ -28,32 +28,28 @@ def getWordDictByGlove(config):
 
 
 def getCategoryAndNewsDict(config):
-    train_news = pd.read_csv(config.DATA_PATH + "MIND" + config.DATASET_TYPE + "_train/news.tsv", sep="\t",
+   train_news = pd.read_csv(config.DATA_PATH + "MIND" + config.DATASET_TYPE[0] + "_train/news.tsv", sep="\t",
                              names=config.NEWS_NAME)
-    dev_news = pd.read_csv(config.DATA_PATH + "MIND" + config.DATASET_TYPE + "_dev/news.tsv", sep="\t",
+    dev_news = pd.read_csv(config.DATA_PATH + "MIND" + config.DATASET_TYPE[0] + "_dev/news.tsv", sep="\t",
                            names=config.NEWS_NAME)
+    news = pd.concat([train_news, dev_news], axis=0)
+    news.drop_duplicates("NewsID", keep='first', inplace=True)
+
     cate_list = []
     subcate_list = []
     news_dict = {}
-    for new in train_news.iterrows():
-        cate = new[1]["Category"]
+    for _, new in news.iterrows():
+        cate = new["Category"]
         if cate not in cate_list:
             cate_list.append(cate)
-        subcate = new[1]["SubCategory"]
+        subcate = new["SubCategory"]
         if subcate not in subcate_list:
             subcate_list.append(subcate)
-        news_dict[new[1]["NewsID"]] = {"Category": new[1]["Category"], "SubCategory": new[1]["SubCategory"],
-                                       "Title": new[1]["Title"], "Abstract": new[1]["Abstract"]}
+        news_dict[new["NewsID"]] = {"Category": new["Category"],
+                                    "SubCategory": new["SubCategory"],
+                                    "Title": new["Title"],
+                                    "Abstract": new["Abstract"]}
 
-    for new in dev_news.iterrows():
-        cate = new[1]["Category"]
-        if cate not in cate_list:
-            cate_list.append(cate)
-        subcate = new[1]["SubCategory"]
-        if subcate not in subcate_list:
-            subcate_list.append(subcate)
-        news_dict[new[1]["NewsID"]] = {"Category": new[1]["Category"], "SubCategory": new[1]["SubCategory"],
-                                       "Title": new[1]["Title"], "Abstract": new[1]["Abstract"]}
     cate2id = {w: i + 1 for i, w in enumerate(cate_list)}
 
     subcate2id = {w: i + 1 for i, w in enumerate(subcate_list)}
