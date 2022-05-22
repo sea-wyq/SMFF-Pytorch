@@ -28,10 +28,14 @@ def getWordDictByGlove(config):
 
 
 def getCategoryAndNewsDict(config):
-   train_news = pd.read_csv(config.DATA_PATH + "MIND" + config.DATASET_TYPE[0] + "_train/news.tsv", sep="\t",
-                             names=config.NEWS_NAME)
-    dev_news = pd.read_csv(config.DATA_PATH + "MIND" + config.DATASET_TYPE[0] + "_dev/news.tsv", sep="\t",
-                           names=config.NEWS_NAME)
+    train_news = pd.read_csv(
+        config.DATA_PATH + "MIND" + config.DATASET_TYPE[0] + "_" + config.DATASET_TYPE[1] + "/news.tsv",
+        sep="\t",
+        names=config.NEWS_NAME)
+    dev_news = pd.read_csv(
+        config.DATA_PATH + "MIND" + config.DATASET_TYPE[0] + "_" + config.DATASET_TYPE[2] + "/news.tsv",
+        sep="\t",
+        names=config.NEWS_NAME)
     news = pd.concat([train_news, dev_news], axis=0)
     news.drop_duplicates("NewsID", keep='first', inplace=True)
 
@@ -103,7 +107,8 @@ def getHisEmbByGlove(new_list, news_dict, glove_id, cate_dict, subcate_dict, fea
 
 
 def getMindDataset(config, model, news_dict, glove_id, cate_dict, subcate_dict, sample_ratio=0):
-    behaviors = pd.read_csv(config.DATA_PATH + "MIND" + config.DATASET_TYPE + "_" + model + "/behaviors.tsv", sep="\t",
+    behaviors = pd.read_csv(config.DATA_PATH + "MIND" + config.DATASET_TYPE[0] + "_" + model + "/behaviors.tsv",
+                            sep="\t",
                             names=config.BEHAVIORS_NAME)
     user_input_list = []
 
