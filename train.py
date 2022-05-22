@@ -27,18 +27,11 @@ def seed_torch(seed=1):
 
 
 def train(config, device, lr, glove_dict, cate_length, subcate_length, train_loader, dev_loader, index):
-    # model = CMM_T(config, glove_dict, cate_length, subcate_length).to(device)
     model = SMFF(config, glove_dict, cate_length, subcate_length).to(device)
-    # model = CMM_CTA(config, glove_dict, cate_length, subcate_length).to(device)
-    # model = CMM_TA(config, glove_dict, cate_length, subcate_length).to(device)
-
     loss_fcn = nn.BCELoss()  # Loss函数
     loss_fcn = loss_fcn.to(device)
     optimizer = torch.optim.Adam(filter(lambda p: p.requires_grad, model.parameters()), lr=lr)
     scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=1, gamma=0.8)
-    # scheduler = torch.optim.lr_scheduler.MultiStepLR(optimizer, [1, 2, 3, 5], gamma=0.8)
-    # scheduler = torch.optim.lr_scheduler.ExponentialLR(optimizer, gamma=0.8)
-    # scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=5)
 
     best_auc = 0
     for _ in range(config.EPOCHS):
@@ -107,8 +100,9 @@ if __name__ == '__main__':
     news_dict = np.load(config.PROCESS_DATA_PATH + "news_dict.npy", allow_pickle=True).item()
     word2id = np.load(config.PROCESS_DATA_PATH + "word2id.npy", allow_pickle=True).item()
 
-    train_sample, _ = getMindDataset(config, "train", news_dict, word2id, cate2id, subcate2id, config.nsample)
-    test_sample, index = getMindDataset(config, "dev", news_dict, word2id, cate2id, subcate2id)
+    train_sample, _ = getMindDataset(config, config.DATASET_TYPE[1], news_dict, word2id, cate2id, subcate2id,
+                                     config.nsample)
+    test_sample, index = getMindDataset(config, config.DATASET_TYPE[2], news_dict, word2id, cate2id, subcate2id)
 
     train_dataset = MindDataset(train_sample)
     test_dataset = MindDataset(test_sample)
