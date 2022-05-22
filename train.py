@@ -28,6 +28,7 @@ def seed_torch(seed=1):
 
 def train(config, device, lr, glove_dict, cate_length, subcate_length, train_loader, dev_loader, index):
     model = SMFF(config, glove_dict, cate_length, subcate_length).to(device)
+
     loss_fcn = nn.BCELoss()  # Loss函数
     loss_fcn = loss_fcn.to(device)
     optimizer = torch.optim.Adam(filter(lambda p: p.requires_grad, model.parameters()), lr=lr)
@@ -63,7 +64,7 @@ def train(config, device, lr, glove_dict, cate_length, subcate_length, train_loa
                 htl, hal, hcl, hsl, itl, ial, icl, isl, label = x
                 htl, hal, hcl, hsl, itl, ial, icl, isl, label = htl.to(device), hal.to(device), hcl.to(device), hsl.to(
                     device), itl.to(device), ial.to(device), icl.to(device), isl.to(device), label.to(device)
-                score = model(htl, hal, hcl, hsl, itl, ial, icl, isl)
+                score = model(htl, hal, hcl, hsl, itl, ial, icl, isl, True)
                 score = score.reshape(-1).cpu().numpy().tolist()
                 label = label.cpu().numpy().tolist()
                 preds.extend(score)
