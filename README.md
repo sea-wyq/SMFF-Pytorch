@@ -2,7 +2,7 @@
 
 ## 数据集准备
 * MIND新闻推荐数据集，下载链接：https://msnews.github.io/
-* Glove 预训练词向量。
+* Glove 预训练词向量, wget https://apache-mxnet.s3.cn-north-1.amazonaws.com.cn/gluon/embeddings/glove/glove.42B.300d.zip
 
 ## 数据处理
 1.创建文件夹
