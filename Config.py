@@ -4,7 +4,7 @@ class Config:
     HISTORY_MAX_LENGTH = 50
     FEATURE_MAX_LENGTH = 15
 
-    HISTORY_MIN_LENGTH = 200
+    HISTORY_MIN_LENGTH = 0
     nsample = 4
     EPOCHS = 10
     BATCH_SIZE = 32
