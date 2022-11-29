@@ -64,7 +64,7 @@ def train(config, device, lr, glove_dict, cate_length, subcate_length, train_loa
                 htl, hal, hcl, hsl, itl, ial, icl, isl, label = x
                 htl, hal, hcl, hsl, itl, ial, icl, isl, label = htl.to(device), hal.to(device), hcl.to(device), hsl.to(
                     device), itl.to(device), ial.to(device), icl.to(device), isl.to(device), label.to(device)
-                score = model(htl, hal, hcl, hsl, itl, ial, icl, isl, True)
+                score = model(htl, hal, hcl, hsl, itl, ial, icl, isl)
                 score = score.reshape(-1).cpu().numpy().tolist()
                 label = label.cpu().numpy().tolist()
                 preds.extend(score)
